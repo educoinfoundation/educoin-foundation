@@ -1,7 +1,8 @@
 Copyright (c) 2009-2012 Bitcoin Developers
 Copyright (c) 2011-2012 Litecoin Developers
 Copyright (c) 2013-2014 Dogecoin Developers
-Copyright (c) 2013-2014 Rabbitcoin Developers
+Copyright (c) 2014 Rabbitcoin Developers
+Copyright (c) 2014 Educoin Developers
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -11,7 +12,7 @@ cryptographic software written by Eric Young (eay@cryptsoft.com) and UPnP
 software written by Thomas Bernard.
 
 
-See readme-qt.rst for instructions on building Rabbitcoin-QT, the
+See readme-qt.rst for instructions on building Educoin-QT, the
 graphical user interface.
 
 WINDOWS BUILD NOTES
@@ -80,9 +81,9 @@ make -f Makefile.mingw
 mkdir miniupnpc
 cp *.h miniupnpc/
 
-Rabbitcoin
+Educoin
 ----------
 DOS prompt:
-cd \rabbitcoin\src
+cd \educoin\src
 mingw32-make -f makefile.mingw
-strip rabbitcoind.exe
+strip educoind.exe

@@ -3,6 +3,7 @@
 // Copyright (c) 2011-2012 The Litecoin Developers
 // Copyright (c) 2013 Dogecoin Developers
 // Copyright (c) 2014 Rabbitcoin Developers
+// Copyright (c) 2014 Educoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -285,10 +286,10 @@ Value stop(const Array& params, bool fHelp)
     if (fHelp || params.size() != 0)
         throw runtime_error(
             "stop\n"
-            "Stop RabbitCoin server.");
+            "Stop EduCoin server.");
     // Shutdown will take long enough that the response should get back
     StartShutdown();
-    return "RabbitCoin server has now stopped running!";
+    return "EduCoin server has now stopped running!";
 }
 
 
@@ -314,7 +315,7 @@ Value getdifficulty(const Array& params, bool fHelp)
 }
 
 
-// Rabbitcoin: Return average network hashes per second based on last number of blocks.
+// Educoin: Return average network hashes per second based on last number of blocks.
 Value GetNetworkHashPS(int lookup) {
     if (pindexBest == NULL)
         return 0;
@@ -458,7 +459,7 @@ Value getnewaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "getnewaddress [account]\n"
-            "Returns a new RabbitCoin address for receiving payments.  "
+            "Returns a new EduCoin address for receiving payments.  "
             "If [account] is specified (recommended), it is added to the address book "
             "so payments received with the address will be credited to [account].");
 
@@ -525,7 +526,7 @@ Value getaccountaddress(const Array& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw runtime_error(
             "getaccountaddress <account>\n"
-            "Returns the current RabbitCoin address for receiving payments to this account.");
+            "Returns the current EduCoin address for receiving payments to this account.");
 
     // Parse the account first so we don't generate a key if there's an error
     string strAccount = AccountFromValue(params[0]);
@@ -543,12 +544,12 @@ Value setaccount(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "setaccount <rabbitcoinaddress> <account>\n"
+            "setaccount <educoinaddress> <account>\n"
             "Sets the account associated with the given address.");
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid RabbitCoin address");
+        throw JSONRPCError(-5, "Invalid EduCoin address");
 
 
     string strAccount;
@@ -573,12 +574,12 @@ Value getaccount(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "getaccount <rabbitcoinaddress>\n"
+            "getaccount <educoinaddress>\n"
             "Returns the account associated with the given address.");
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid RabbitCoin address");
+        throw JSONRPCError(-5, "Invalid EduCoin address");
 
     string strAccount;
     map<CTxDestination, string>::iterator mi = pwalletMain->mapAddressBook.find(address.Get());
@@ -645,13 +646,13 @@ Value sendtoaddress(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 2 || params.size() > 4)
         throw runtime_error(
-            "sendtoaddress <rabbitcoinaddress> <amount> [comment] [comment-to]\n"
+            "sendtoaddress <educoinaddress> <amount> [comment] [comment-to]\n"
             "<amount> is a real and is rounded to the nearest 0.00000001"
             + HelpRequiringPassphrase());
 
     CBitcoinAddress address(params[0].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid RabbitCoin address");
+        throw JSONRPCError(-5, "Invalid EduCoin address");
 
     // Amount
     int64 nAmount = AmountFromValue(params[1]);
@@ -677,7 +678,7 @@ Value signmessage(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "signmessage <rabbitcoinaddress> <message>\n"
+            "signmessage <educoinaddress> <message>\n"
             "Sign a message with the private key of an address");
 
     EnsureWalletIsUnlocked();
@@ -712,7 +713,7 @@ Value verifymessage(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 3)
         throw runtime_error(
-            "verifymessage <rabbitcoinaddress> <signature> <message>\n"
+            "verifymessage <educoinaddress> <signature> <message>\n"
             "Verify a signed message");
 
     string strAddress  = params[0].get_str();
@@ -749,14 +750,14 @@ Value getreceivedbyaddress(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw runtime_error(
-            "getreceivedbyaddress <rabbitcoinaddress> [minconf=1]\n"
-            "Returns the total amount received by <rabbitcoinaddress> in transactions with at least [minconf] confirmations.");
+            "getreceivedbyaddress <educoinaddress> [minconf=1]\n"
+            "Returns the total amount received by <educoinaddress> in transactions with at least [minconf] confirmations.");
 
-    // rabbitcoin address
+    // educoin address
     CBitcoinAddress address = CBitcoinAddress(params[0].get_str());
     CScript scriptPubKey;
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid RabbitCoin address");
+        throw JSONRPCError(-5, "Invalid EduCoin address");
     scriptPubKey.SetDestination(address.Get());
     if (!IsMine(*pwalletMain,scriptPubKey))
         return (double)0.0;
@@ -970,14 +971,14 @@ Value sendfrom(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 3 || params.size() > 6)
         throw runtime_error(
-            "sendfrom <fromaccount> <torabbitcoinaddress> <amount> [minconf=1] [comment] [comment-to]\n"
+            "sendfrom <fromaccount> <toeducoinaddress> <amount> [minconf=1] [comment] [comment-to]\n"
             "<amount> is a real and is rounded to the nearest 0.00000001"
             + HelpRequiringPassphrase());
 
     string strAccount = AccountFromValue(params[0]);
     CBitcoinAddress address(params[1].get_str());
     if (!address.IsValid())
-        throw JSONRPCError(-5, "Invalid RabbitCoin address");
+        throw JSONRPCError(-5, "Invalid EduCoin address");
     int64 nAmount = AmountFromValue(params[2]);
     int nMinDepth = 1;
     if (params.size() > 3)
@@ -1033,7 +1034,7 @@ Value sendmany(const Array& params, bool fHelp)
     {
         CBitcoinAddress address(s.name_);
         if (!address.IsValid())
-            throw JSONRPCError(-5, string("Invalid RabbitCoin address:")+s.name_);
+            throw JSONRPCError(-5, string("Invalid EduCoin address:")+s.name_);
 
         if (setAddress.count(address))
             throw JSONRPCError(-8, string("Invalid parameter, duplicated address: ")+s.name_);
@@ -1076,7 +1077,7 @@ Value addmultisigaddress(const Array& params, bool fHelp)
     {
         string msg = "addmultisigaddress <nrequired> <'[\"key\",\"key\"]'> [account]\n"
             "Add a nrequired-to-sign multisignature address to the wallet\"\n"
-            "each key is a RabbitCoin address or hex-encoded public key\n"
+            "each key is a EduCoin address or hex-encoded public key\n"
             "If [account] is specified, assign address to [account].";
         throw runtime_error(msg);
     }
@@ -1792,7 +1793,7 @@ Value encryptwallet(const Array& params, bool fHelp)
     // slack space in .dat files; that is bad if the old data is
     // unencrypted private keys.  So:
     StartShutdown();
-    return "wallet encrypted; RabbitCoin server stopping, restart to run with encrypted wallet";
+    return "wallet encrypted; EduCoin server stopping, restart to run with encrypted wallet";
 }
 
 class DescribeAddressVisitor : public boost::static_visitor<Object>
@@ -1834,8 +1835,8 @@ Value validateaddress(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "validateaddress <rabbitcoinaddress>\n"
-            "Return information about <rabbitcoinaddress>.");
+            "validateaddress <educoinaddress>\n"
+            "Return information about <educoinaddress>.");
 
     CBitcoinAddress address(params[0].get_str());
     bool isValid = address.IsValid();
@@ -1870,10 +1871,10 @@ Value getworkex(const Array& params, bool fHelp)
         );
 
     if (vNodes.empty())
-        throw JSONRPCError(-9, "RabbitCoin is not connected!!!");
+        throw JSONRPCError(-9, "EduCoin is not connected!!!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(-10, "RabbitCoin is downloading blocks...");
+        throw JSONRPCError(-10, "EduCoin is downloading blocks...");
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;
@@ -2002,10 +2003,10 @@ Value getwork(const Array& params, bool fHelp)
             "If [data] is specified, tries to solve the block and returns true if it was successful.");
 
     if (vNodes.empty())
-        throw JSONRPCError(-9, "RabbitCoin is not connected!");
+        throw JSONRPCError(-9, "EduCoin is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(-10, "RabbitCoin is downloading blocks...");
+        throw JSONRPCError(-10, "EduCoin is downloading blocks...");
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;    // FIXME: thread safety
@@ -2065,7 +2066,7 @@ Value getwork(const Array& params, bool fHelp)
         result.push_back(Pair("data",     HexStr(BEGIN(pdata), END(pdata))));
         result.push_back(Pair("hash1",    HexStr(BEGIN(phash1), END(phash1)))); // deprecated
         result.push_back(Pair("target",   HexStr(BEGIN(hashTarget), END(hashTarget))));
-        result.push_back(Pair("algorithm", "scrypt:1024,1,1"));  // RabbitCoin: specify that we should use the scrypt algorithm
+        result.push_back(Pair("algorithm", "scrypt:1024,1,1"));  // EduCoin: specify that we should use the scrypt algorithm
         return result;
     }
     else
@@ -2134,10 +2135,10 @@ Value getblocktemplate(const Array& params, bool fHelp)
     if (strMode == "template")
     {
         if (vNodes.empty())
-            throw JSONRPCError(-9, "RabbitCoin is not connected!");
+            throw JSONRPCError(-9, "EduCoin is not connected!");
 
         if (IsInitialBlockDownload())
-            throw JSONRPCError(-10, "RabbitCoin is downloading blocks...");
+            throw JSONRPCError(-10, "EduCoin is downloading blocks...");
 
         static CReserveKey reservekey(pwalletMain);
 
@@ -2413,7 +2414,7 @@ string HTTPPost(const string& strMsg, const map<string,string>& mapRequestHeader
 {
     ostringstream s;
     s << "POST / HTTP/1.1\r\n"
-      << "User-Agent: rabbitcoin-json-rpc/" << FormatFullVersion() << "\r\n"
+      << "User-Agent: educoin-json-rpc/" << FormatFullVersion() << "\r\n"
       << "Host: 127.0.0.1\r\n"
       << "Content-Type: application/json\r\n"
       << "Content-Length: " << strMsg.size() << "\r\n"
@@ -2444,7 +2445,7 @@ static string HTTPReply(int nStatus, const string& strMsg, bool keepalive)
     if (nStatus == 401)
         return strprintf("HTTP/1.0 401 Authorization Required\r\n"
             "Date: %s\r\n"
-            "Server: rabbitcoin-json-rpc/%s\r\n"
+            "Server: educoin-json-rpc/%s\r\n"
             "WWW-Authenticate: Basic realm=\"jsonrpc\"\r\n"
             "Content-Type: text/html\r\n"
             "Content-Length: 296\r\n"
@@ -2471,7 +2472,7 @@ static string HTTPReply(int nStatus, const string& strMsg, bool keepalive)
             "Connection: %s\r\n"
             "Content-Length: %d\r\n"
             "Content-Type: application/json\r\n"
-            "Server: rabbitcoin-json-rpc/%s\r\n"
+            "Server: educoin-json-rpc/%s\r\n"
             "\r\n"
             "%s",
         nStatus,
@@ -2569,7 +2570,7 @@ bool HTTPAuthorized(map<string, string>& mapHeaders)
 }
 
 //
-// JSON-RPC protocol.  RabbitCoin speaks version 1.0 for maximum compatibility,
+// JSON-RPC protocol.  EduCoin speaks version 1.0 for maximum compatibility,
 // but uses JSON-RPC 1.1/2.0 standards for parts of the 1.0 standard that were
 // unspecified (HTTP errors and contents of 'error').
 //
@@ -2847,7 +2848,7 @@ void ThreadRPCServer2(void* parg)
     {
         unsigned char rand_pwd[32];
         RAND_bytes(rand_pwd, 32);
-        string strWhatAmI = "To use rabbitcoind";
+        string strWhatAmI = "To use educoind";
         if (mapArgs.count("-server"))
             strWhatAmI = strprintf(_("To use the %s option"), "\"-server\"");
         else if (mapArgs.count("-daemon"))
@@ -2855,7 +2856,7 @@ void ThreadRPCServer2(void* parg)
         uiInterface.ThreadSafeMessageBox(strprintf(
             _("%s, you must set a rpcpassword in the configuration file:\n %s\n"
               "It is recommended you use the following random password:\n"
-              "rpcuser=rabbitcoinrpc\n"
+              "rpcuser=educoinrpc\n"
               "rpcpassword=%s\n"
               "(you do not need to remember this password)\n"
               "If the file does not exist, create it with owner-readable-only file permissions.\n"),

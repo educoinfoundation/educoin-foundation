@@ -54,7 +54,7 @@
              </font>
             </property>
             <property name="toolTip">
-             <string>The displayed information may be out of date. Your wallet automatically synchronizes with the RabbitCoin network after a connection is established, but this process has not completed yet.</string>
+             <string>The displayed information may be out of date. Your wallet automatically synchronizes with the EduCoin network after a connection is established, but this process has not completed yet.</string>
             </property>
             <property name="styleSheet">
              <string notr="true">QLabel { color: red; }</string>
@@ -306,7 +306,7 @@
              </font>
             </property>
             <property name="toolTip">
-             <string>The displayed information may be out of date. Your wallet automatically synchronizes with the RabbitCoin network after a connection is established, but this process has not completed yet.</string>
+             <string>The displayed information may be out of date. Your wallet automatically synchronizes with the EduCoin network after a connection is established, but this process has not completed yet.</string>
             </property>
             <property name="styleSheet">
              <string notr="true">QLabel { color: red; }</string>

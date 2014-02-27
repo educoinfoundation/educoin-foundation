@@ -3,6 +3,7 @@
 // Copyright (c) 2011-2012 Litecoin Developers
 // Copyright (c) 2013 Dogecoin Developers
 // Copyright (c) 2014 Rabbitcoin Developers
+// Copyright (c) 2014 Educoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -288,16 +289,16 @@ void ThreadIRCSeed2(void* parg)
         }
         
         if (fTestNet) {
-            Send(hSocket, "JOIN #rabbitcoinTEST9\r");
-            Send(hSocket, "WHO #rabbitcoinTEST9\r");
+            Send(hSocket, "JOIN #educoinTEST9\r");
+            Send(hSocket, "WHO #educoinTEST9\r");
         } else {
-            // randomly join #rabbitcoin00-#rabbitcoin99
+            // randomly join #educoin00-#educoin99
             // network is now over 3k peers , get them to join 50 random channels!
             //            channel_number = 0; 
             int channel_number = GetRandInt(50);
 
-            Send(hSocket, strprintf("JOIN #rabbitcoin%02d\r", channel_number).c_str());
-            Send(hSocket, strprintf("WHO #rabbitcoin%02d\r", channel_number).c_str());
+            Send(hSocket, strprintf("JOIN #educoin%02d\r", channel_number).c_str());
+            Send(hSocket, strprintf("WHO #educoin%02d\r", channel_number).c_str());
         }
 
         int64 nStart = GetTime();

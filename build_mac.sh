@@ -1,3 +1,3 @@
-rm -rf /Applications/rabbitcoin-qt.app
+rm -rf /Applications/educoin-qt.app
 make -f Makefile
-cp -Rp rabbitcoin-qt.app /Applications/
+cp -Rp educoin-qt.app /Applications/

@@ -3,6 +3,7 @@
 // Copyright (c) 2011-2012 Litecoin Developers
 // Copyright (c) 2013 Dogecoin Developers
 // Copyright (c) 2014 Rabbitcoin Developers
+// Copyright (c) 2014 Educoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -938,7 +939,7 @@ static std::string FormatException(std::exception* pex, const char* pszThread)
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "rabbitcoin";
+    const char* pszModule = "educoin";
 #endif
     if (pex)
         return strprintf(
@@ -974,13 +975,13 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\RabbitCoin
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\RabbitCoin
-    // Mac: ~/Library/Application Support/RabbitCoin
-    // Unix: ~/.rabbitcoin
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\EduCoin
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\EduCoin
+    // Mac: ~/Library/Application Support/EduCoin
+    // Unix: ~/.educoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "RabbitCoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "EduCoin";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -992,10 +993,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     fs::create_directory(pathRet);
-    return pathRet / "RabbitCoin";
+    return pathRet / "EduCoin";
 #else
     // Unix
-    return pathRet / ".rabbitcoin";
+    return pathRet / ".educoin";
 #endif
 #endif
 }
@@ -1037,7 +1038,7 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
 
 boost::filesystem::path GetConfigFile()
 {
-    boost::filesystem::path pathConfigFile(GetArg("-conf", "rabbitcoin.conf"));
+    boost::filesystem::path pathConfigFile(GetArg("-conf", "educoin.conf"));
     if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir(false) / pathConfigFile;
     return pathConfigFile;
 }
@@ -1047,14 +1048,14 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 {
     boost::filesystem::ifstream streamConfig(GetConfigFile());
     if (!streamConfig.good())
-        return; // No RabbitCoin.conf file is OK
+        return; // No EduCoin.conf file is OK
 
     set<string> setOptions;
     setOptions.insert("*");
 
     for (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it)
     {
-        // Don't overwrite existing settings so command line settings override rabbitcoin.conf
+        // Don't overwrite existing settings so command line settings override educoin.conf
         string strKey = string("-") + it->string_key;
         if (mapSettingsRet.count(strKey) == 0)
         {
@@ -1068,7 +1069,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 
 boost::filesystem::path GetPidFile()
 {
-    boost::filesystem::path pathPidFile(GetArg("-pid", "rabbitcoind.pid"));
+    boost::filesystem::path pathPidFile(GetArg("-pid", "educoind.pid"));
     if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
     return pathPidFile;
 }
@@ -1208,10 +1209,10 @@ void AddTimeData(const CNetAddr& ip, int64 nTime)
                 if (!fMatch)
                 {
                     fDone = true;
-                    string strMessage = _("Warning: Please check that your computer's date and time are correct.  If your clock is wrong RabbitCoin will not work properly.");
+                    string strMessage = _("Warning: Please check that your computer's date and time are correct.  If your clock is wrong EduCoin will not work properly.");
                     strMiscWarning = strMessage;
                     printf("*** %s\n", strMessage.c_str());
-                    uiInterface.ThreadSafeMessageBox(strMessage+" ", string("RabbitCoin"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION);
+                    uiInterface.ThreadSafeMessageBox(strMessage+" ", string("EduCoin"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION);
                 }
             }
         }
