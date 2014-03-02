@@ -1065,7 +1065,6 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
-    printf("Hash %s > %s",hash, bnTarget.getuint256());
     if (hash > bnTarget.getuint256())
         return error("CheckProofOfWork() : hash doesn't match nBits");
 
@@ -2140,7 +2139,6 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("hashGenesisBlock = %s\n", hashGenesisBlock.ToString().c_str());
         printf("block.hashMerkleRoot = %s\n", block.hashMerkleRoot.ToString().c_str());
         assert(block.hashMerkleRoot == uint256("0x777"));
-        block.print();
 
 		if (false && block.GetHash() != hashGenesisBlock) {
 		
