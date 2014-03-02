@@ -1065,6 +1065,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
+    printf("Hash %s > %s",hash, bnTarget.getuint256());
     if (hash > bnTarget.getuint256())
         return error("CheckProofOfWork() : hash doesn't match nBits");
 
@@ -2112,7 +2113,7 @@ bool LoadBlockIndex(bool fAllowNew)
         }
 
         // Genesis block
-        const char* pszTimestamp = "Bye Bye February";
+        const char* pszTimestamp = "Soon March";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2124,13 +2125,13 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1393561307;
+        block.nTime    = 13935613016;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 1559378;
+        block.nNonce   = 0;
 
         if (fTestNet)
         {
-            block.nTime    = 1393561307;
+            block.nTime    = 13935613016;
             block.nNonce   = 0;
         }
 
@@ -2138,7 +2139,8 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("block.GetHash() = %s\n", block.GetHash().ToString().c_str());
         printf("hashGenesisBlock = %s\n", hashGenesisBlock.ToString().c_str());
         printf("block.hashMerkleRoot = %s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0xfb37a8a0dc73c426b984b9023526121157d5c5ce7f3c14ae28c3bcaaa335926d"));
+        assert(block.hashMerkleRoot == uint256("0x8472fdacb1480a28eb03bd2f6637aa3b58d3be447518a649e19af414ec450288"));
+        block.print();
 
 		if (false && block.GetHash() != hashGenesisBlock) {
 		

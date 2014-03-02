@@ -49,7 +49,7 @@ static const int fHaveUPnP = false;
 
 extern CScript COINBASE_FLAGS;
 
-static const uint256 hashGenesisBlockOfficial("0x0027dc1a740a47086cab0b640dcf7275a6efd94aed3c06da79a89ea5192f2059");
+static const uint256 hashGenesisBlockOfficial("0x70aaf3b54948bd4884f9c6a9928c4c7b60b078aa73c1e36e47f03a2cfbcbc687");
 
 extern CCriticalSection cs_main;
 extern std::map<uint256, CBlockIndex*> mapBlockIndex;
