@@ -1065,7 +1065,6 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
-    printf("Hash %s > %s",hash, bnTarget.getuint256());
     if (hash > bnTarget.getuint256())
         return error("CheckProofOfWork() : hash doesn't match nBits");
 
@@ -2088,11 +2087,11 @@ bool LoadBlockIndex(bool fAllowNew)
 {
     if (fTestNet)
     {
-        pchMessageStart[0] = 0xfc;
-        pchMessageStart[1] = 0xc1;
-        pchMessageStart[2] = 0xb7;
-        pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0x");
+        pchMessageStart[0] = 0xcc;
+        pchMessageStart[1] = 0xff;
+        pchMessageStart[2] = 0x7a;
+        pchMessageStart[3] = 0x04;
+        hashGenesisBlock = uint256("0x71a4d0368da30f13a263ab554dcd112aa17f4f86a3ed9429b708456e3f359061");
     }
 
     //
@@ -2119,28 +2118,28 @@ bool LoadBlockIndex(bool fAllowNew)
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 88 * COIN;
+        //TODO(fib): replace before release!
         txNew.vout[0].scriptPubKey = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
         CBlock block;
         block.vtx.push_back(txNew);
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 13935613016;
+        block.nTime    = 666;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 0;
+        block.nNonce   = 666;
 
         if (fTestNet)
         {
-            block.nTime    = 13935613016;
-            block.nNonce   = 0;
+            block.nTime    = 1393750611;
+            block.nNonce   = 332035;
         }
 
         //// debug print
         printf("block.GetHash() = %s\n", block.GetHash().ToString().c_str());
         printf("hashGenesisBlock = %s\n", hashGenesisBlock.ToString().c_str());
         printf("block.hashMerkleRoot = %s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x8472fdacb1480a28eb03bd2f6637aa3b58d3be447518a649e19af414ec450288"));
-        block.print();
+        assert(block.hashMerkleRoot == uint256("0xdfc2d41f8cf8341440d620263e1c10ed1a0b93b5fd2b4caee53939ab11f5873c"));
 
 		if (false && block.GetHash() != hashGenesisBlock) {
 		
