@@ -2091,7 +2091,7 @@ bool LoadBlockIndex(bool fAllowNew)
         pchMessageStart[1] = 0xff;
         pchMessageStart[2] = 0x7a;
         pchMessageStart[3] = 0x04;
-        hashGenesisBlock = uint256("0x");
+        hashGenesisBlock = uint256("0x71a4d0368da30f13a263ab554dcd112aa17f4f86a3ed9429b708456e3f359061");
     }
 
     //
@@ -2118,6 +2118,7 @@ bool LoadBlockIndex(bool fAllowNew)
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 88 * COIN;
+        //TODO(fib): replace before release!
         txNew.vout[0].scriptPubKey = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
         CBlock block;
         block.vtx.push_back(txNew);
@@ -2131,7 +2132,7 @@ bool LoadBlockIndex(bool fAllowNew)
         if (fTestNet)
         {
             block.nTime    = 1393750611;
-            block.nNonce   = 777;
+            block.nNonce   = 332035;
         }
 
         //// debug print
@@ -2140,7 +2141,7 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("block.hashMerkleRoot = %s\n", block.hashMerkleRoot.ToString().c_str());
         assert(block.hashMerkleRoot == uint256("0xdfc2d41f8cf8341440d620263e1c10ed1a0b93b5fd2b4caee53939ab11f5873c"));
 
-		if (true && block.GetHash() != hashGenesisBlock) {
+		if (false && block.GetHash() != hashGenesisBlock) {
 		
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
