@@ -303,7 +303,7 @@ isEmpty(BOOST_THREAD_LIB_SUFFIX) {
 }
 
 isEmpty(BDB_LIB_PATH) {
-    macx:BDB_LIB_PATH = /usr/local/Cellar/berkeley-db/5.3.21/lib/
+    macx:BDB_LIB_PATH = /usr/local/Cellar/berkeley-db/5.3.28/lib/
 }
 
 isEmpty(BDB_LIB_SUFFIX) {
@@ -311,7 +311,7 @@ isEmpty(BDB_LIB_SUFFIX) {
 }
 
 isEmpty(BDB_INCLUDE_PATH) {
-    macx:BDB_INCLUDE_PATH = /usr/local/Cellar/berkeley-db/5.3.21/include/
+    macx:BDB_INCLUDE_PATH = /usr/local/Cellar/berkeley-db/5.3.28/include/
 }
 
 isEmpty(BOOST_LIB_PATH) {

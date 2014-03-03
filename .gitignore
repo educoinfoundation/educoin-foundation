@@ -22,3 +22,6 @@
 
 
 src/obj/*
+build/
+
+.DS_*
