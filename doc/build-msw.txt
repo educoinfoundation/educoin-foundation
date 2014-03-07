@@ -69,7 +69,8 @@ Boost
 DOS prompt:
 downloaded boost jam 3.1.18
 cd \boost-1.47.0-mgw
-bjam toolset=gcc --build-type=complete stage
+http://stackoverflow.com/questions/7847454/how-do-i-install-the-boost-library-to-my-mingw-compiler
+bjam vcbc toolset=gcc --build-type=complete stage
 
 MiniUPnPc
 ---------
