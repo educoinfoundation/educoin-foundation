@@ -1,3 +1,6 @@
+
+
+
 Copyright (c) 2009-2012 Bitcoin Developers
 Copyright (c) 2011-2012 Litecoin Developers
 Copyright (c) 2013-2014 Dogecoin Developers
@@ -51,6 +54,8 @@ Mingw
 -------
 Download the installer from http://sourceforge.net/projects/mingw/files/Installer/
 Run it, install GCC, Msys and stuff
+
+Add MinGW install folder to your PATH environment (C:\MinGW\msys\1.0\bin and C:\Mingw\bin)
 Follow Getting started, do not forget this http://www.mingw.org/wiki/Getting_Started#toc7
 
 
