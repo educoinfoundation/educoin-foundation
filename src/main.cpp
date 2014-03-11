@@ -2112,7 +2112,7 @@ bool LoadBlockIndex(bool fAllowNew)
         }
 
         // Genesis block
-        const char* pszTimestamp = "Soon March";
+        const char* pszTimestamp = "The Face Behind Bitcoin";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2125,7 +2125,7 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 666;
+        block.nTime    = 1394508162;
         block.nBits    = 0x1e0ffff0;
         block.nNonce   = 666;
 
@@ -2139,9 +2139,9 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("block.GetHash() = %s\n", block.GetHash().ToString().c_str());
         printf("hashGenesisBlock = %s\n", hashGenesisBlock.ToString().c_str());
         printf("block.hashMerkleRoot = %s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0xdfc2d41f8cf8341440d620263e1c10ed1a0b93b5fd2b4caee53939ab11f5873c"));
+        assert(block.hashMerkleRoot == uint256("0x92d2c4e9c68fe4665dbc2e41d60077a1954e43523f37c4465c23097bcd3661a4"));
 
-		if (false && block.GetHash() != hashGenesisBlock) {
+		if (true && block.GetHash() != hashGenesisBlock) {
 		
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
