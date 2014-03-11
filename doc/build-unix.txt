@@ -21,12 +21,16 @@ To Build
 cd src/
 mkdir obj/
 make -f makefile.unix USE_UPNP=-           # Headless educoind
+#make -f makefile.unix USE_UPNP=1 STATIC=1 # Release
 
 See readme-qt.rst for instructions on building Educoin-Qt,
 the graphical user interface.
 
 Build Instructions Ubuntu (13.04 Raring)
 ----------------------------------------
+    sudo apt-get install libboost-system1.53.0 libboost-filesystem1.53.0 libboost-program-options1.53.0 libboost-thread1.53.0 libdb5.1++ libminiupnpc8
+
+or
 
     sudo apt-get install build-essential \
                          libssl-dev \
