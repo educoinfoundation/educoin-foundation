@@ -5,21 +5,21 @@
 USE_UPNP:=0
 
 INCLUDEPATHS= \
- -I"C:\boost_1_53_0" \
- -I"C:\db-4.8.30.NC\build_unix" \
- -I"C:\openssl-1.0.1e\include" 
+ -I"C:\altcoin\boost_1_49_0" \
+ -I"C:\altcoin\db-5.3.28.NC\build_unix" \
+ -I"C:\altcoin\openssl-1.0.1f\include" 
 
 
 LIBPATHS= \
- -L"C:\boost_1_53_0\stage\lib" \
- -L"C:\db-4.8.30.NC\build_unix" \
- -L"C:\openssl-1.0.1e" 
+ -L"C:\altcoin\boost_1_49_0\stage\lib" \
+ -L"C:\altcoin\db-5.3.28.NC\build_unix" \
+ -L"C:\altcoin\openssl-1.0.1f" 
 
 LIBS= \
- -l boost_system-mgw45-mt-d-1_53 \
- -l boost_filesystem-mgw45-mt-d-1_53 \
- -l boost_program_options-mgw45-mt-d-1_53 \
- -l boost_thread-mgw45-mt-d-1_53 \
+ -l boost_program_options-mgw48-mt-d-1_49 \
+ -l boost_system-mgw48-mt-d-1_49 \
+ -l boost_filesystem-mgw48-mt-d-1_49 \
+ -l boost_thread-mgw48-mt-d-1_49 \
  -l db_cxx \
  -l ssl \
  -l crypto
@@ -31,7 +31,8 @@ CFLAGS=-mthreads -O2 -w -Wall -Wextra -Wformat -Wformat-security -Wno-unused-par
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
 
 ifdef USE_UPNP
- LIBPATHS += -L"C:\upnpc-exe-win32"
+ INCLUDEPATHS += -I"C:\altcoin\miniupnpc-1.8"
+ LIBPATHS += -L"C:\altcoin\miniupnpc-1.8"
  LIBS += -l miniupnpc -l iphlpapi
  DEFS += -DSTATICLIB -DUSE_UPNP=$(USE_UPNP)
 endif
@@ -85,10 +86,10 @@ obj-test/%.o: test/%.cpp $(HEADERS)
 	g++ -c $(TESTDEFS) $(CFLAGS) -o $@ $<
 
 test_educoin.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
-	g++ $(CFLAGS) -o $@ $(LIBPATHS) $^ -lboost_unit_test_framework-mgw45-mt-d-1_53 $(LIBS)
+	g++ $(CFLAGS) -o $@ $(LIBPATHS) $^ -lboost_unit_test_framework-mgw48-mt-d-1_49 $(LIBS)
 
 clean:
-	rm -f educoind.exe test_educoin.exe
 	rm -f obj/*.o
 	rm -f obj-test/*.o
 	rm -f build.h
+	rm -f educoind.exe test_educoin.exe

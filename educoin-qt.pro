@@ -3,21 +3,23 @@ TARGET =
 VERSION = 1.0.0
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE BOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN __NO_SYSTEM_INCLUDES
-CONFIG += no_include_pwd
+CONFIG += no_include_pwd static
 
 win32 {
  LIBS += -lshlwapi
  LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
  LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
  LIBS += -lws2_32 -lole32 -loleaut32 -luuid -lgdi32
- LIBS += -lboost_system-mgw46-mt-sd-1_53 -lboost_filesystem-mgw46-mt-sd-1_53 -lboost_program_options-mgw46-mt-sd-1_53 -lboost_thread-mgw46-mt-sd-1_53
- BOOST_LIB_SUFFIX=-mgw46-mt-sd-1_53
- BOOST_INCLUDE_PATH=C:/deps/boost
- BOOST_LIB_PATH=C:/deps/boost/stage/lib
- BDB_INCLUDE_PATH=C:/deps/db/build_unix
- BDB_LIB_PATH=C:/deps/db/build_unix
- OPENSSL_INCLUDE_PATH=C:/deps/ssl/include
- OPENSSL_LIB_PATH=C:/deps/ssl
+ LIBS += -lboost_system-mgw48-mt-sd-1_49 -lboost_filesystem-mgw48-mt-sd-1_49 -lboost_program_options-mgw48-mt-sd-1_49 -lboost_thread-mgw48-mt-sd-1_49
+ BOOST_LIB_SUFFIX=-mgw48-mt-sd-1_49
+ BOOST_INCLUDE_PATH=C:/altcoin/boost_1_49_0
+ BOOST_LIB_PATH=C:/altcoin/boost_1_49_0/stage/lib
+ BDB_INCLUDE_PATH=C:/altcoin/db-5.3.28.NC/build_unix
+ BDB_LIB_PATH=C:/altcoin/db-5.3.28.NC/build_unix
+ OPENSSL_INCLUDE_PATH=C:/altcoin/openssl-1.0.1f/include
+ OPENSSL_LIB_PATH=C:/altcoin/openssl-1.0.1f
+ MINIUPNPC_INCLUDE_PATH=C:/altcoin/miniupnpc-1.8
+ MINIUPNPC_LIB_PATH=C:/altcoin/miniupnpc-1.8
 }
 
 OBJECTS_DIR = build
@@ -89,6 +91,7 @@ contains(BITCOIN_NEED_QT_PLUGINS, 1) {
     QMAKE_LFLAGS += -fstack-protector
     # do not enable this on windows, as it will result in a non-working executable!
 }
+win32:QMAKE_LFLAGS *= -Wl,--large-address-aware -static
 
 # regenerate src/build.h
 !windows|contains(USE_BUILD_INFO, 1) {

@@ -36,13 +36,13 @@ Windows build instructions:
 
 - Download the `Qt Windows SDK`_ and install it. You don't need the Symbian stuff, just the desktop Qt.
 
-- Download and extract the `dependencies archive`_  [#]_, or compile openssl, boost and dbcxx yourself.
+- Download (this is obsolete: `dependencies archive`_  [#]_), you must compile openssl, boost and dbcxx yourself.
 
 - Copy the contents of the folder "deps" to "X:\\QtSDK\\mingw", replace X:\\ with the location where you installed the Qt SDK. Make sure that the contents of "deps\\include" end up in the current "include" directory.
 
 - Open the educoin-qt.pro file in Qt Creator and build as normal (ctrl-B)
 
-.. _`Qt Windows SDK`: http://qt.nokia.com/downloads/sdk-windows-cpp
+.. _`Qt Windows SDK`: http://download.qt-project.org/archive/qt/4.8/4.8.5/qt-win-opensource-4.8.5-mingw.exe
 .. _`dependencies archive`: https://download.visucore.com/bitcoin/qtgui_deps_1.zip
 .. [#] PGP signature: https://download.visucore.com/bitcoin/qtgui_deps_1.zip.sig (signed with RSA key ID `610945D0`_)
 .. _`610945D0`: http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x610945D0
