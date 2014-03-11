@@ -1,6 +1,3 @@
-
-
-
 Copyright (c) 2009-2012 Bitcoin Developers
 Copyright (c) 2011-2012 Litecoin Developers
 Copyright (c) 2013-2014 Dogecoin Developers
@@ -53,10 +50,11 @@ miniupnpc    1.6
 Mingw
 -------
 Download the installer from http://sourceforge.net/projects/mingw/files/Installer/
-Run it, install GCC, Msys and stuff
+Run it, install ONLY Msys.
 
-Add MinGW install folder to your PATH environment (C:\MinGW\msys\1.0\bin and C:\Mingw\bin)
-Follow Getting started, do not forget this http://www.mingw.org/wiki/Getting_Started#toc7
+Download and install toolchain http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/4.8.2/threads-posix/dwarf/i686-4.8.2-release-posix-dwarf-rt_v3-rev2.7z/download
+
+Add MinGW install folder to your PATH environment (C:\mingw32\bin)
 
 
 OpenSSL
@@ -71,14 +69,21 @@ make
 Berkeley DB
 -----------
 MSYS shell:
-cd /c/db-4.8.30.NC-mgw/build_unix
-sh ../dist/configure --enable-mingw --enable-cxx
+cd /c/db-5.3.28.NC/build_unix
+ 
+ in db.5.3.28.NC/build_unix/db.h
+ /* Thread and process identification. */
+ typedef u_int32_t db_threadid_t;
+
+sh ../dist/configure  --enable-pthread_self --enable-mingw --enable-cxx
 make
 
 Boost
 -----
 DOS prompt:
 cd \boost-1.49.0-mgw
+ apply https://svn.boost.org/trac/boost/ticket/6797
+ apply https://svn.boost.org/trac/boost/changeset/79334
 http://stackoverflow.com/questions/7847454/how-do-i-install-the-boost-library-to-my-mingw-compiler
 bjam toolset=gcc --build-type=complete stage
 
