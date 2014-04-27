@@ -16,8 +16,8 @@ win32 {
  BOOST_LIB_PATH=C:/altcoin/boost_1_49_0/stage/lib
  BDB_INCLUDE_PATH=C:/altcoin/db-5.3.28.NC/build_unix
  BDB_LIB_PATH=C:/altcoin/db-5.3.28.NC/build_unix
- OPENSSL_INCLUDE_PATH=C:/altcoin/openssl-1.0.1f/include
- OPENSSL_LIB_PATH=C:/altcoin/openssl-1.0.1f
+ OPENSSL_INCLUDE_PATH=C:/altcoin/openssl-1.0.1g/include
+ OPENSSL_LIB_PATH=C:/altcoin/openssl-1.0.1g
  MINIUPNPC_INCLUDE_PATH=C:/altcoin/miniupnpc-1.8
  MINIUPNPC_LIB_PATH=C:/altcoin/miniupnpc-1.8
 }
