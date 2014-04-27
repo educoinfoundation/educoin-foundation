@@ -326,11 +326,11 @@ isEmpty(BOOST_INCLUDE_PATH) {
 }
 
 isEmpty(OPENSSL_INCLUDE_PATH) {
-    macx:OPENSSL_INCLUDE_PATH = /usr/local/Cellar/openssl/1.0.1f/include/
+    macx:OPENSSL_INCLUDE_PATH = /usr/local/Cellar/openssl/1.0.1g/include/
 }
 
 isEmpty(OPENSSL_LIB_PATH) {
-    macx:OPENSSL_LIB_PATH = /usr/local/Cellar/openssl/1.0.1f/lib/
+    macx:OPENSSL_LIB_PATH = /usr/local/Cellar/openssl/1.0.1g/lib/
 }
 
 windows:LIBS += -lws2_32 -lshlwapi -lmswsock
