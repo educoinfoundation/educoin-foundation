@@ -37,4 +37,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ubuntu12_04_config.vm.network "private_network", ip:"192.168.59.10"
   end
 
+  config.vm.define :ubuntu13_10 do |ubuntu13_10_config|
+    ubuntu13_10_config.vm.box = "ubuntu-13.10_32"
+    ubuntu13_10_config.vm.host_name = "ubuntu1310"
+    ubuntu13_10_config.vm.network "private_network", ip:"192.168.59.11"
+  end
+
 end
