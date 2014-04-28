@@ -372,6 +372,8 @@ contains(RELEASE, 1) {
     !windows:!macx {
         # Linux: turn dynamic linking back on for c/c++ runtime libraries
         LIBS += -Wl,-Bdynamic
+        #to link OpenSSL statically need to include its dependencies
+        LIBS += -lz -ldl
     }
 }
 
