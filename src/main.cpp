@@ -927,14 +927,14 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
             PastDifficultyAveragePrev = PastDifficultyAverage;
             
             if (LatestBlockTime < BlockReading->GetBlockTime()) {
-              if (BlockReading->nHeight > 140000) { LatestBlockTime = BlockReading->GetBlockTime(); }
+              if (BlockReading->nHeight > 158000) { LatestBlockTime = BlockReading->GetBlockTime(); }
             }
             PastRateActualSeconds = LatestBlockTime - BlockReading->GetBlockTime();
 
             PastRateTargetSeconds                        = TargetBlocksSpacingSeconds * PastBlocksMass;
             PastRateAdjustmentRatio                        = double(1);
 
-            if (BlockReading->nHeight > 140000) {
+            if (BlockReading->nHeight > 158000) {
               if (PastRateActualSeconds < 1) { PastRateActualSeconds = 1; }
             } else {
               if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
